@@ -26,6 +26,22 @@ class Address(Base):
     person_id = Column(Integer, ForeignKey('person.id'))
     person = relationship(Person)
 
+class User(Base):
+    __tablename__ = 'user'
+    id = Column(String(250), primary_key=True)
+    name = Column(String(250))
+    user_name = Column(String(250))
+    password = Column(String(250))
+    email = Column(String(250))
+
+class Character(Base):
+    __tablename__ = 'character'
+    id = Column(String(250), primary_key=True)
+    name = Column(String(250))
+    height = Column(Integer)
+    mass = Column(Integer)
+    hair_color = Column(String(250))
+
     def to_dict(self):
         return {}
 
