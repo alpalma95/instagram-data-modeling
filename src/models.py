@@ -11,44 +11,29 @@ Base = declarative_base()
 class User(Base):
     __tablename__ = 'user'
     id = Column(Integer, primary_key=True)
-    name = Column(String(250))
     user_name = Column(String(250))
-    password = Column(String(250))
+    first_name = Column(String(250))
+    last_name = Column(String(250))
     email = Column(String(250))
 
-class Character(Base):
-    __tablename__ = 'character'
-    id = Column(String(250), primary_key=True)
-    name = Column(String(250))
-    height = Column(Integer)
-    mass = Column(Integer)
-    hair_color = Column(String(250))
-    skin_color = Column(String(250))
-    eye_color = Column(String(250))
-    birth_year = Column(Integer)
-    gender = Column(String(250))
-    uid = Column(Integer)
-
-class Planet(Base):
-    __tablename__ = 'planet'
-    id = Column(String(250), primary_key=True)
-    name = Column(String(250))
-    diameter = Column(Integer)
-    rotation_period = Column(Integer)
-    orbital_period = Column(Integer)
-    gravity = Column(String(250))
-    population = Column(Integer)
-    climate = Column(String(250))
-    terrain = Column(String(250))
-    surface_water = Column(Integer)
-    uid = Column(Integer)
-
-class Favorite(Base):
-    __tablename__ = 'favorite'
+class Post(Base):
+    __tablename__ = 'post'
     id = Column(Integer, primary_key=True)
     user_id = Column(Integer, ForeignKey('user.id'))
-    character_id = Column(String(250), ForeignKey('character.id'))
-    planet_id = Column((String(250)), ForeignKey('planet.id'))
+
+class Comment(Base):
+    __tablename__ = 'comment'
+    id = Column(Integer, primary_key=True)
+    text = Column(String(250))
+    author_id = Column(Integer, ForeignKey('user.id'))
+    post_id = Column(Integer, ForeignKey('post.id'))
+
+class Media(Base):
+    __tablename__ = 'media'
+    id = Column(Integer, primary_key=True)
+    media_type = Column(String(250))
+    url = Column(String(250))
+    post_id = Column(Integer, ForeignKey('post.id'))
     
     def to_dict(self):
         return {}
